@@ -65,7 +65,6 @@
             <v-card-title class="justify-center">
               <span class="text-h4">หายป่วยวันนี้</span>
             </v-card-title>
-            <v-divider />
             <v-card-text>
               <div class="d-flex justify-center">
                 <span class="white--text text-h2 font-weight-bold">
@@ -148,6 +147,24 @@
           </v-card>
         </v-col>
       </v-row>
+      <v-row justify="center" align="center">
+        <v-col
+          cols="12"
+        >
+          <v-card dark color="primary" to="/donate" height="150">
+            <v-card-title class="justify-center">
+              <span class="text-h4">ยอดบริจาค</span>
+            </v-card-title>
+            <v-card-text>
+              <div class="d-flex justify-center">
+                <span class="white--text text-h3 font-weight-bold">
+                  {{ donate }} ฿
+                </span>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-col>
   </v-container>
 </template>
@@ -164,7 +181,8 @@ export default {
     infections_accumulated: '000',
     well_accumulated: '000',
     is_healing: '000',
-    died: '000'
+    died: '000',
+    donate: '10,000'
   }),
   computed: {
     getdatenow () {

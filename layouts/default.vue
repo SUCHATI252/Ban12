@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-app-bar dense flat color="transparent" :class="!$vuetify.theme.dark && 'blue lighten-5'">
+    <v-app-bar app dense flat color="transparent" :class="!$vuetify.theme.dark && 'blue lighten-5'">
       <v-spacer />
       <v-tooltip bottom>
         <template #activator="{ on, attrs }">
@@ -30,8 +30,6 @@
     <v-main :class="!$vuetify.theme.dark && 'blue lighten-5'">
       <Nuxt />
     </v-main>
-    <snack-bar />
-    <overlay />
   </v-app>
 </template>
 

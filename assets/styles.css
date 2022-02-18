@@ -1,0 +1,29 @@
+:root {
+  --hover-color: 111, 76, 255;
+}
+html {
+  overflow-y: auto !important
+}
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+.text-glow {
+  text-shadow: 0 0 80px rgb(192 219 255 / 75%), 0 0 32px rgb(65 120 255 / 24%);
+}
+.text-gradient {
+  background: linear-gradient(to right, #30CFD0, #c43ad6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.btn-gradient {
+  background-image: linear-gradient(to right, rgb(1 134 218), rgb(182 49 167));
+  border: 0;
+}
+.btn-gradient:hover {
+  box-shadow: rgba(var(--hover-color), 0.5) 0px 0px 20px 0px;
+}
