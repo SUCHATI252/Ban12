@@ -1,16 +1,44 @@
 <template>
   <v-container class="fill-height justify-center">
+    <v-app-bar dense app flat color="transparent">
+      <v-spacer />
+      <v-tooltip bottom>
+        <template #activator="{ on, attrs }">
+          <v-btn
+            id="theme-guest"
+            aria-label="theme-dark"
+            icon
+            class="mr-3"
+            v-bind="attrs"
+            @click="$vuetify.theme.dark=!$vuetify.theme.dark"
+            v-on="on"
+          >
+            <v-icon>mdi-invert-colors</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ $vuetify.theme.dark?'Light':'Dark' }}</span>
+      </v-tooltip>
+      <v-btn-toggle dense>
+        <v-btn x-small>
+          th
+        </v-btn>
+        <v-btn x-small>
+          en
+        </v-btn>
+      </v-btn-toggle>
+    </v-app-bar>
     <v-col cols="12" md="8">
       <v-row justify="end" align="center">
         <v-col
           cols="12"
-          md="5"
+          md="4"
         >
           <v-card flat>
-            <v-card-title>
-              <v-spacer />
-              <span>อัปเดตล่าสุด {{ getdatenow }}</span>
-            </v-card-title>
+            <v-card-text class="pa-1">
+              <div class="d-flex justify-end">
+                <span>อัปเดตล่าสุด {{ getdatenow }}</span>
+              </div>
+            </v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -26,7 +54,7 @@
             <v-card-text>
               <div class="d-flex justify-center">
                 <span class="white--text text-h2 font-weight-bold">
-                  + 1,000
+                  {{ infections_today }}
                 </span>
               </div>
               <v-divider class="white mt-2" />
@@ -39,7 +67,7 @@
                   </div>
                   <v-divider />
                   <div class="text-center">
-                    1,000
+                    {{ ATK }}
                   </div>
                 </div>
                 <v-divider vertical class="white" />
@@ -49,7 +77,7 @@
                   </div>
                   <v-divider />
                   <div class="text-center">
-                    1,000
+                    {{ hospital }}
                   </div>
                 </div>
               </div>
@@ -60,7 +88,7 @@
           cols="12"
           md="6"
         >
-          <v-card dark color="green lighten-1" height="200">
+          <v-card dark color="success" height="200">
             <v-card-title class="justify-center">
               <span class="text-h4">หายป่วยวันนี้</span>
             </v-card-title>
@@ -68,7 +96,7 @@
             <v-card-text>
               <div class="d-flex justify-center">
                 <span class="white--text text-h2 font-weight-bold">
-                  1,000
+                  {{ well_today }}
                 </span>
               </div>
             </v-card-text>
@@ -87,7 +115,7 @@
             <v-card-text>
               <div class="d-flex justify-center">
                 <span class="white--text text-h5 font-weight-bold">
-                  0000
+                  {{ infections_accumulated }}
                 </span>
               </div>
             </v-card-text>
@@ -104,7 +132,7 @@
             <v-card-text>
               <div class="d-flex justify-center">
                 <span class="white--text text-h5 font-weight-bold">
-                  0000
+                  {{ well_accumulated }}
                 </span>
               </div>
             </v-card-text>
@@ -123,7 +151,7 @@
             <v-card-text>
               <div class="d-flex justify-center">
                 <span class="white--text text-h5 font-weight-bold">
-                  0000
+                  {{ is_healing }}
                 </span>
               </div>
             </v-card-text>
@@ -140,7 +168,7 @@
             <v-card-text>
               <div class="d-flex justify-center">
                 <span class="white--text text-h5 font-weight-bold">
-                  0000
+                  {{ died }}
                 </span>
               </div>
             </v-card-text>
@@ -152,17 +180,23 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'IndexPage',
+  data: () => ({
+    infections_today: '000',
+    hospital: '000',
+    ATK: '000',
+    well_today: '000',
+    infections_accumulated: '000',
+    well_accumulated: '000',
+    is_healing: '000',
+    died: '000'
+  }),
   computed: {
     getdatenow () {
-      let today = new Date()
-      const dd = String(today.getDate()).padStart(2, '0')
-      const mm = String(today.getMonth() + 1).padStart(2, '0') // January is 0!
-      const yyyy = today.getFullYear()
-
-      today = `${dd}/${mm}/${yyyy}`
-      return today
+      moment.locale('th')
+      return moment().format('L LT')
     }
   }
 }
