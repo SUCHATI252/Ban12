@@ -1,6 +1,9 @@
 <template>
   <v-app dark>
     <v-app-bar app dense flat color="transparent" :class="!$vuetify.theme.dark && 'blue lighten-5'">
+      <v-btn v-if="!$auth.loggedIn && $route.fullPath !== '/login'" text :to="localePath('/login')">
+        login
+      </v-btn>
       <v-spacer />
       <v-tooltip bottom>
         <template #activator="{ on, attrs }">

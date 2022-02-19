@@ -84,25 +84,25 @@ export default {
       cookieKey: 'language'
     }
   },
-  // router: {
-  //   middleware: ['auth']
-  // },
-  // auth: {
-  //   redirect: {
-  //     login: '/login',
-  //     logout: '/login',
-  //     home: '/sales'
-  //   },
-  //   strategies: {
-  //     local: {
-  //       endpoints: {
-  //         login: { url: 'login/check_login' },
-  //         user: { url: 'users/me', method: 'post' },
-  //         logout: { url: 'home/logout' }
-  //       }
-  //     }
-  //   }
-  // },
+  router: {
+    middleware: ['auth']
+  },
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'login/check_login' },
+          user: { url: 'users/me', method: 'post' },
+          logout: { url: 'home/logout' }
+        }
+      }
+    }
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

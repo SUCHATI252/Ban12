@@ -1,6 +1,5 @@
 <template>
   <v-container class="fill-height justify-center">
-    <app-bar />
     <v-col cols="12" md="6" lg="4" sm="7">
       <v-form ref="form_login" @submit.prevent="check_login">
         <v-card class="pa-5" rounded="lg" elevation="5">
@@ -123,6 +122,9 @@ export default {
   },
   created () {
     this.email = this.$cookies.get('email') || ''
+
+    // eslint-disable-next-line no-console
+    console.log(this.$route.fullPath)
   },
   methods: {
     FormData (obj) {

@@ -174,6 +174,7 @@
 import moment from 'moment'
 export default {
   name: 'IndexPage',
+  auth: false,
   data: () => ({
     infections_today: '',
     hospital: '000',
