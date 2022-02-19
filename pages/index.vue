@@ -20,14 +20,14 @@
           cols="12"
           md="6"
         >
-          <v-card dark color="error" height="200">
+          <v-card dark color="error" height="200" @click="$refs.allinfectionsdialog.open()">
             <v-card-title class="justify-center">
-              <span class="text-h4">ติดเชื้อเพิ่มวันนี้</span>
+              <span class="text-h4">ติดเชื้อวันนี้</span>
             </v-card-title>
             <v-card-text>
               <div class="d-flex justify-center">
                 <span class="white--text text-h2 font-weight-bold">
-                  {{ infections_today }}
+                  + {{ infections_today }}
                 </span>
               </div>
               <v-divider class="white mt-2" />
@@ -166,6 +166,7 @@
         </v-col>
       </v-row>
     </v-col>
+    <allinfections-dialog ref="allinfectionsdialog" />
   </v-container>
 </template>
 
@@ -174,20 +175,33 @@ import moment from 'moment'
 export default {
   name: 'IndexPage',
   data: () => ({
-    infections_today: '000',
+    infections_today: '',
     hospital: '000',
     ATK: '000',
     well_today: '000',
-    infections_accumulated: '000',
+    infections_accumulated: '',
     well_accumulated: '000',
     is_healing: '000',
     died: '000',
     donate: '10,000'
   }),
+  async fetch () {
+    this.infections_accumulated = await this.$axios.$post('/infections/all')
+    this.infections_today = await this.$axios.$post('/infections/today')
+  },
   computed: {
     getdatenow () {
       moment.locale('th')
       return moment().format('L LT')
+    }
+  },
+  methods: {
+    FormData (obj) {
+      const Data = new FormData()
+      for (const key in obj) {
+        Data.append(key, obj[key])
+      }
+      return Data
     }
   }
 }
