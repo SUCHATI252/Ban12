@@ -19,10 +19,10 @@
         <span>{{ $vuetify.theme.dark?'Light':'Dark' }}</span>
       </v-tooltip>
       <v-btn-toggle dense>
-        <v-btn x-small>
+        <v-btn :to="switchLocalePath('th')" x-small>
           th
         </v-btn>
-        <v-btn x-small>
+        <v-btn :to="switchLocalePath('en')" x-small>
           en
         </v-btn>
       </v-btn-toggle>
@@ -35,6 +35,19 @@
 
 <script>
 export default {
-  name: 'DefaultLayout'
+  name: 'DefaultLayout',
+  head () {
+    return {
+      htmlAttrs: { lang: this.$i18n.locale }
+    }
+  },
+  watch: {
+    '$vuetify.theme.dark' (val) {
+      this.$cookies.set('Dark', val)
+    }
+  },
+  beforeCreate () {
+    this.$vuetify.theme.dark = (this.$cookies.get('Dark') === true)
+  }
 }
 </script>

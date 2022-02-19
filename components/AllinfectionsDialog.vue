@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="dialog" max-width="700">
     <v-card>
       <v-card-title>
         ผู้ติดเชื้อวันนี้
@@ -19,7 +19,7 @@
             single-line
             hide-details
             filled
-            max-with
+            dense
           />
         </div>
       </v-card-title>
