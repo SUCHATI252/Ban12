@@ -5,7 +5,6 @@ export default {
       u_id INTEGER,
       u_name VARCHAR(50),
       email VARCHAR(100) UNIQUE,
-      username VARCHAR(50) UNIQUE,
       password VARCHAR(255),
       salt VARCHAR(255),
       address TEXT,
@@ -27,8 +26,7 @@ export default {
   person: `
     CREATE TABLE IF NOT EXISTS persons (
       id INTEGER,
-      fname VARCHAR(50),
-      lname VARCHAR(50),
+      name VARCHAR(50),
       age INTEGER,
       gender  VARCHAR(50),
       number INTEGER,

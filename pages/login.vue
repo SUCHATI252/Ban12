@@ -148,17 +148,7 @@ export default {
               this.email = ''
               this.$refs.email.focus()
               this.$store.commit('SET_ERROR', this.$t('login.email_no_match'))
-            } else if (res.no_activate) {
-              this.password = ''
-              this.email = ''
-              this.$refs.email.focus()
-              this.$store.commit('SET_ERROR', this.$t('login.user_no_activate'))
-            } else if (res.is_locked) {
-              this.password = ''
-              this.email = ''
-              this.$refs.email.focus()
-              this.$store.commit('SET_ERROR', this.$t('login.email_is_lock'))
-            } else if (res.error_password) {
+            } else if (res.errorpassword) {
               this.lock_id--
               this.password = ''
               this.$refs.password.focus()

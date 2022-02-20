@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
-import LoginModel from '../Models/LoginModel'
+import bcrypt from 'bcryptjs'
+import LoginModel from '../models/loginModel'
 import Find from '../models/find'
 import Hashpass from '../libraries/Hashpassword'
 import Random from '../libraries/RandomInt'
@@ -9,17 +10,15 @@ import time from '../libraries/DateTime'
 
 export default {
   check_login: (req, res) => {
-    const username = req.body.username
+    const email = req.body.email
     const password = req.body.password
-    if (username && password) {
-      Find(username, '*', 'username', 'users', (err, result) => {
+    if (email && password) {
+      Find(email, '*', 'email', 'users', (err, result) => {
         if (err) { return res.send(err) }
         if (result) {
-          const passHash = Hashpass(password, result.salt)
-          if (username === result.username && passHash === result.password) {
+          const passHash = bcrypt.hashSync(password, result.salt)
+          if (bcrypt.compareSync(password, passHash)) {
             const authUser = {
-              username: result.username,
-              id_card: result.id_card,
               name: result.u_name,
               email: result.email,
               phone: result.phone,
@@ -37,7 +36,7 @@ export default {
             res.json({ errorpassword: true })
           }
         } else {
-          res.json({ nouser: true })
+          res.json({ error_email: true })
         }
       })
     } else {

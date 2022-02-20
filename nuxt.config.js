@@ -83,21 +83,21 @@ export default {
       cookieKey: 'language'
     }
   },
-  // router: {
-  //   middleware: ['auth']
-  // },
+  router: {
+    middleware: ['auth']
+  },
   auth: {
     redirect: {
       login: '/login',
       logout: '/login',
-      home: '/'
+      home: '/admin'
     },
     strategies: {
       local: {
         endpoints: {
           login: { url: '/login/check_login' },
-          user: { url: 'users/me', method: 'post' },
-          logout: { url: 'home/logout' }
+          user: { url: '/users/me', method: 'post' },
+          logout: false
         }
       }
     }

@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center">
       <div class="py-5">
-        <h1>Welcome to Admin</h1>
+        <h1>Welcome to {{ $auth.user.name }}</h1>
       </div>
     </v-row>
     <v-item-group>
@@ -18,7 +18,7 @@
                 :elevation="hover ? 12 : 2"
                 class="d-flex align-center justify-center"
                 height="200"
-                @click="topup=true"
+                @click="$refs.newperson.open('add')"
               >
                 <div class="d-flex flex-column">
                   <v-icon class="text-h1" :color="hover ? 'grey' : ''">
@@ -64,13 +64,13 @@
           sm="6"
           md="4"
         >
-          <v-item v-slot="{ toggle }">
+          <v-item>
             <v-hover v-slot="{ hover }">
               <v-card
                 :elevation="hover ? 12 : 2"
                 class="d-flex align-center justify-center"
                 height="200"
-                @click="toggle"
+                @click="$refs.addinfections.open()"
               >
                 <div class="d-flex flex-column">
                   <v-icon class="text-h1" :color="hover ? 'grey' : ''">
@@ -164,12 +164,32 @@
         </v-col>
       </v-row>
     </v-item-group>
+    <allinfections-dialog ref="addinfections" />
+    <form-new-person ref="newperson" @add="AddNew" />
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'AdminPage'
+  name: 'AdminPage',
+  layout: 'dashboard',
+  methods: {
+    async AddNew (data) {
+      this.$store.commit('LOADIND_DIALOG', true)
+      await this.$axios.$post('/person/new', data)
+        .then((res) => {
+          setTimeout(() => {
+            if (res.success) {
+              this.$store.commit('SET_SUCCESS', 'Add Person success')
+            } else {
+              this.$store.commit('SET_ERROR', 'ERROR')
+            }
+            this.$refs.newperson.close()
+            this.$store.commit('LOADIND_DIALOG', false)
+          }, 1000)
+        })
+    }
+  }
 }
 </script>
 

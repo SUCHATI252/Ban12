@@ -39,7 +39,7 @@ export default {
       {
         text: '#',
         align: 'start',
-        value: 'index'
+        value: 'id'
       },
       {
         text: 'ชื่อ สกุล',
@@ -59,26 +59,18 @@ export default {
       },
       {
         text: 'วันที่ตรวจ',
-        value: 'checked_by'
+        value: 'date_infection'
       },
       {
         text: 'สถานะ',
         value: 'status'
       }
     ],
-    lists: [
-      {
-        index: +1,
-        date: '00/00/000',
-        name: 'นาย test test',
-        number: '100',
-        age: '20',
-        gender: 'ชาย',
-        checked_by: '19/02/2022',
-        status: 'ATK'
-      }
-    ]
+    lists: []
   }),
+  async fetch () {
+    this.lists = await this.$axios.$post('/infections/listall').then(res => res)
+  },
   methods: {
     open () {
       this.dialog = true

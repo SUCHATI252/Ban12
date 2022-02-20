@@ -1,8 +1,11 @@
 <template>
   <v-app dark>
     <v-app-bar app dense flat color="transparent" :class="!$vuetify.theme.dark && 'blue lighten-5'">
-      <v-btn v-if="hiden_in_login_page" text :to="localePath('/login')">
+      <v-btn v-if="hiden_in_login_page" :to="localePath('/login')">
         login
+      </v-btn>
+      <v-btn v-if="$auth.loggedIn" :to="localePath('/admin')">
+        admin
       </v-btn>
       <v-spacer />
       <v-tooltip bottom>
@@ -33,6 +36,8 @@
     <v-main :class="!$vuetify.theme.dark && 'blue lighten-5'">
       <Nuxt />
     </v-main>
+    <snack-bar />
+    <overlay />
   </v-app>
 </template>
 
