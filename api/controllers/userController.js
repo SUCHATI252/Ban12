@@ -29,7 +29,8 @@ export default {
     const salt = bcrypt.genSaltSync(10)
     const rand = Random(8)
     // eslint-disable-next-line no-console
-    console.log(rand)
+    // console.log(rand)
+    // 16820000
     const password = bcrypt.hashSync(rand, salt)
     const email = req.body.email
     const newdata = {
