@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-app-bar app dense flat color="transparent" :class="!$vuetify.theme.dark && 'blue lighten-5'">
-      <v-btn v-if="!$auth.loggedIn && $route.fullPath !== '/login'" text :to="localePath('/login')">
+      <v-btn v-if="hiden_in_login_page" text :to="localePath('/login')">
         login
       </v-btn>
       <v-spacer />
@@ -42,6 +42,17 @@ export default {
   head () {
     return {
       htmlAttrs: { lang: this.$i18n.locale }
+    }
+  },
+  computed: {
+    hiden_in_login_page () {
+      let status = true
+      if (this.$auth.loggedIn) {
+        status = false
+      } else if (this.$route.fullPath === this.localePath('/login')) {
+        status = false
+      }
+      return status
     }
   },
   watch: {

@@ -1,11 +1,18 @@
 import express from 'express'
 import User from './controllers/userController'
 import Person from './controllers/personController'
-const app = express.Router()
-app.post('/users', User.AllUsers)
+import Login from './controllers/loginController'
+const $rout = express.Router()
+$rout.post('/users', User.AllUsers)
 
-app.post('/infections/all', Person.infections_all)
+$rout.post('/infections/all', Person.infections_all)
 
-app.post('/infections/today', Person.infections_today)
+$rout.post('/infections/today', Person.infections_today)
 
-export default app
+$rout.post('/login/check_login', Login.check_login)
+
+$rout.post('/test', (req, res) => {
+  return res.json({ name: req.body.name })
+})
+
+export default $rout

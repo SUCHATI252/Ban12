@@ -60,8 +60,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/api/',
-    credentials: true
+    baseURL: '/api'
   },
   i18n: {
     locales: [
@@ -84,9 +83,9 @@ export default {
       cookieKey: 'language'
     }
   },
-  router: {
-    middleware: ['auth']
-  },
+  // router: {
+  //   middleware: ['auth']
+  // },
   auth: {
     redirect: {
       login: '/login',
@@ -96,7 +95,7 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login/check_login' },
+          login: { url: '/login/check_login' },
           user: { url: 'users/me', method: 'post' },
           logout: { url: 'home/logout' }
         }

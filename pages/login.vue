@@ -141,7 +141,7 @@ export default {
         this.$refs.password.focus()
       } else if (this.$refs.form_login.validate()) {
         this.$store.commit('SET_OVERLAY', true)
-        const data = this.FormData({ email: this.email, password: this.password })
+        const data = { email: this.email, password: this.password }
         await this.$axios.$post('/login/check_login', data).then((res) => {
           setTimeout(() => {
             if (res.error_email) {
